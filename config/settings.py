@@ -32,10 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'bookshelf',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,11 +121,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = 'index'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/bookshelf/"
+LOGOUT_REDIRECT_URL = "/bookshelf/"
 
-#ユーザ登録時に登録されたメールアドレスにメールを送り本人確認をする
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_REQUIRED = True
+# 暗号化されたhttpsを使うようにする
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+
+#確認メールに記載するURL
+FRONTEND_URL = "https://localhost-m2033099-1.paiza-user-free.cloud:8000"
+
+AUTH_USER_MODEL = 'registration.User'
