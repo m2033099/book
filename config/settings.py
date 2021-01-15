@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'bookshelf',
     'registration',
+    'anymail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,7 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/bookshelf/"
@@ -135,3 +135,11 @@ SECURE_SSL_REDIRECT = True
 FRONTEND_URL = "https://localhost-m2033099-1.paiza-user-free.cloud:8000"
 
 AUTH_USER_MODEL = 'registration.User'
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": "c9ab78e169eb8280f80efa04c564746a-28d78af2-72e4e60b",
+    "MAILGUN_SENDER_DOMAIN": 'sandbox1124c5806d5e43409705676438369f84.mailgun.org',
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "sample@example.com"
+SERVER_EMAIL = "m1610600@gmail.com"
