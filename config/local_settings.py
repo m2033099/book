@@ -17,8 +17,8 @@ DATABASES = {
 
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": "c9ab78e169eb8280f80efa04c564746a-28d78af2-72e4e60b",
-    "MAILGUN_SENDER_DOMAIN": 'sandbox1124c5806d5e43409705676438369f84.mailgun.org',
+    "MAILGUN_API_KEY": "a34da71e9812ad5078111fefe53ed909-28d78af2-49546361",
+    "MAILGUN_SENDER_DOMAIN": 'sandboxcf83f5110be441f39437995eb8cab928.mailgun.org',
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "recommend_book@example.com"
