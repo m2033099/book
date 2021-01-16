@@ -3,3 +3,6 @@ gunicorn
 whitenoise
 django-heroku
 django-anymail[mailgun]
+dj-database-url
+python-dotenv
+psycopg2-binary
