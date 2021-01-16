@@ -11,14 +11,14 @@
       iOSのSafariで表示倍率を自動的に縮小する処理を無効にする（shrink-to-fit=no）-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--Bootstrap-->
-    <title>Study App</title>
+    <title>Recommend book</title>
 
 </head>
 
 <body>
     <header class='site-header'>
         <nav class="navbar navbar-expand navbar-dark" style='background-color:#2d2d2d'>
-            <a href="#" class='navbar-brand'>Home</a>
+            <a href="{% url 'bookshelf:index' %}" class='navbar-brand'>Home</a>
             <ul class='navbar-nav'>
                 <!--ログイン時にはログインしたユーザー名とLogoutを表示する-->
                 {% if user.is_authenticated %}
@@ -30,17 +30,18 @@
                 <li class='nav-item'><a href="{% url 'login' %}" class='nav-link'>ログイン</a></li>
                 <li class="nav-item"><a href="{% url 'password_reset' %}" class='signup nav-link'>パスワードを忘れた場合</a></li>
                 <li class="nav-item"><a href="{% url 'signup' %}" class='signup nav-link'>新規登録</a></li>
-                
+
                 {% endif %}
             </ul>
         </nav>
     </header>
     <main role='main' class='container-field' style="margin: 15px;">
         <div class='row'>
-            <div class='col-md-6'>
-                {% block main %}{% endblock %}
 
+            <div class='col-md-8'>
+                {% block main %}{% endblock %}
             </div>
+
         </div>
     </main>
 

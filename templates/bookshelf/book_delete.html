@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<h3>{{ book.title }}</h3>
+<p>削除してもよろしいですか？</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="削除">
+</form>
+
+<a href="{% url 'bookshelf:index'%}">Homeに戻る</a>
+
+
+{% endblock %}

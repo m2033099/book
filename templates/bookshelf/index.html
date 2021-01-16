@@ -1,4 +1,79 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
 {% block main %}
-<h1>こんにちは! {{ user }}さん</h1>
+<h1>こんにちは、{{ user }}さん</h1>
+<p>ユーザーさんがおすすめしたい本が集められます。</p>
+<p>本の追加の際は上のメニューからログインして下さい。初めての方は上のメニューから新規登録をしてからログインして下さい。</p>
+
+<h3><i class="fas fa-book" style="margin-right: 15px;"></i>おすすめ本一覧</h3>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center">カテゴリー</th>
+            <th class="text-center">タイトル</th>
+            <th class="text-center">著者</th>
+            <th class="text-center">おすすめレベル</th>
+            <th class="text-center">いいね</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td class="text-center">{{ book.category }}</td>
+            <td class="text-center">{{ book.title }}</td>
+            <td class="text-center">{{ book.author }}</td>
+            <td class="text-center">{{ book.recommend_level }} / 10</td>
+            <td class="text-center">
+                <a href="{% url 'bookshelf:like' book_id=book.id %}"
+                    class="btn btn-primary btn-sm">いいね！({{book.like}})</a>
+            </td>
+            <td class="text-center">
+                <a href="{% url 'bookshelf:book_detail' book_id=book.id %}" class="btn btn-primary btn-sm">詳細</a>
+                <!--ログインしている時は削除ボタンを表示する-->
+                {% if user.is_authenticated %}
+                <a href="{% url 'bookshelf:book_delete' book_id=book.id %}" class="btn btn-secondary btn-sm">削除</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+
+
+</table>
+{% if books.has_previous %}
+<a href="?page={{ books.previous_page_number }}">&lt; 前のページ</a>
+{% else %}
+<span>&lt; 前のページ</span>
+{% endif %}
+
+{{ books.number }}ページ
+
+{% if books.has_next %}
+<a href="?page={{ books.next_page_number }}">次のページ &gt;</a>
+{% else %}
+<span>次のページ &gt;</span>
+{% endif %}
+
+<!--ログインしている時は追加ボタンを表示する-->
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-sm-1">
+        <a href="{% url 'bookshelf:book_add' %}" class="btn btn-primary btn-sm">追加</a>
+    </div>
+    <div class="col-sm-10">
+
+    </div>
+    <div class="col-sm-1">
+        <!--tweetボタン-->
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=本を追加しました。#recommend_book">Tweet</a>
+
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}

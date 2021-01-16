@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,11 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7#whkl8p%!(z1fqopt!!sc(gg=&*#muer^1evhy75)dt^65$lz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -73,17 +72,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -131,15 +119,24 @@ LOGOUT_REDIRECT_URL = "/bookshelf/"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 
-#確認メールに記載するURL
-FRONTEND_URL = "https://localhost-m2033099-1.paiza-user-free.cloud:8000"
+# 確認メールに記載するURL
+FRONTEND_URL = "http://localhost:8000"
 
 AUTH_USER_MODEL = 'registration.User'
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": "c9ab78e169eb8280f80efa04c564746a-28d78af2-72e4e60b",
-    "MAILGUN_SENDER_DOMAIN": 'sandbox1124c5806d5e43409705676438369f84.mailgun.org',
-}
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "sample@example.com"
-SERVER_EMAIL = "m1610600@gmail.com"
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+
+    ANYMAIL = os.environ['ANYMAIL']
+    EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+    DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+    SERVER_EMAIL = os.environ['SERVER_EMAIL']

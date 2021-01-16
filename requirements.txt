@@ -1,3 +1,5 @@
 django
 gunicorn
 whitenoise
+django-heroku
+django-anymail[mailgun]

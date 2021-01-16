@@ -12,6 +12,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='bookshelf/')),
     path('', include("django.contrib.auth.urls")),
     path("signup/", views.SignUpView.as_view(), name="signup"),
+    path("send_mail/", views.SendMailView.as_view(), name="send_mail"),
     path('activate/<uidb64>/<token>/', views.ActivateView.as_view(), name='activate'),
-    
+
 ]
