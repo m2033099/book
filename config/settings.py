@@ -129,7 +129,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 
 # 確認メールに記載するURL
-FRONTEND_URL = "http://localhost:8000"
+FRONTEND_URL = "https://django-recommend-book.herokuapp.com/"
 
 AUTH_USER_MODEL = 'registration.User'
 
