@@ -1,4 +1,4 @@
-{% extends 'book/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,6 +7,7 @@
         padding: 10px, 15px;
     }
 </style>
+
 <h1 style="margin-top: 10px;">こんにちは、{{ user }}さん</h1>
 <p>おすすめしたい本を追加して下さい。追加の際は上のメニューからLoginをお願いします。初めての方は上のSign UpをしてからLoginをお願いします。</p>
 
@@ -153,6 +154,7 @@
 </div>
 
 <div style="clear: both;"></div>
+<div style="padding-bottom: 100px;"></div>
 
 
 {% endblock content %}
