@@ -124,9 +124,11 @@ LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/bookshelf/"
 LOGOUT_REDIRECT_URL = "/bookshelf/"
 
+"""
 # 暗号化されたhttpsを使うようにする
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
+"""
 
 # 確認メールに記載するURL
 FRONTEND_URL = "https://django-recommend-book.herokuapp.com/"

@@ -1,7 +1,7 @@
 __pycache__
 db.sqlite3
 staticfiles
-local_settingsgi.py
+local_settings.py
 .env
 .DS_Store
 __pycache__
